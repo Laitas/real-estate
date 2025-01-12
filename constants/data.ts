@@ -65,7 +65,7 @@ export const categories = [
   { title: "Apartments", category: "Apartments" },
   { title: "Townhomes", category: "Townhomes" },
   { title: "Others", category: "Others" },
-];
+] as const;
 
 export const settings = [
   {
