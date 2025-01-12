@@ -41,7 +41,7 @@ export async function login() {
       throw new Error("Failed to login, secret or userId is missing");
 
     const session = await account.createSession(userId, secret);
-    if (session) throw new Error("Failed to login, no session");
+    if (!session) throw new Error("Failed to login, no session");
 
     return true;
   } catch (error) {
