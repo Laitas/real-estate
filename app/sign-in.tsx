@@ -25,7 +25,7 @@ const SignIn = () => {
       <ScrollView contentContainerClassName="h-full">
         <Image
           source={images.onboarding}
-          className="w-full h-4/6"
+          className="w-full h-4/6 mx-auto"
           resizeMode="contain"
         />
         <View className="px-10 pb-6">
