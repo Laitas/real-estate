@@ -22,27 +22,26 @@ export async function login() {
   try {
     const redirectUri = Linking.createURL("/");
 
-    const res = await account.createOAuth2Token(
-      OAuthProvider.Google,
-      redirectUri
-    );
+    const res = account.createOAuth2Token(OAuthProvider.Google, redirectUri);
 
-    if (!res) throw new Error("Failed to login");
+    if (!res) throw new Error("Failed to login, no res");
 
     const browserResult = await WebBrowser.openAuthSessionAsync(
       res.toString(),
       redirectUri
     );
 
-    if (browserResult.type !== "success") throw new Error("Failed to login");
+    if (browserResult.type !== "success")
+      throw new Error("Failed to login, type is not success");
 
     const url = new URL(browserResult.url);
     const secret = url.searchParams.get("secret")?.toString();
     const userId = url.searchParams.get("userId")?.toString();
-    if (!secret || !userId) throw new Error("Failed to login");
+    if (!secret || !userId)
+      throw new Error("Failed to login, secret or userId is missing");
 
     const session = await account.createSession(userId, secret);
-    if (session) throw new Error("Failed to login");
+    if (session) throw new Error("Failed to login, no session");
 
     return true;
   } catch (error) {
@@ -53,8 +52,8 @@ export async function login() {
 
 export async function logout() {
   try {
-    await account.deleteSession("current");
-    return true;
+    const res = await account.deleteSession("current");
+    return res;
   } catch (error) {
     console.error(error);
     return false;
