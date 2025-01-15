@@ -1,6 +1,7 @@
 import Text from "@/components/Text";
 import { settings } from "@/constants/data";
 import icons from "@/constants/icons";
+import seed from "@/constants/seed";
 import { logout } from "@/lib/appwrite";
 import { useGlobalContext } from "@/lib/global-provider";
 import { cn } from "@/lib/utils";
@@ -54,6 +55,9 @@ const Profile = () => {
         </View>
 
         <View className="flex flex-col mt-10">
+          {user?.$id === "67828e0b1fa9b6216ccd" && (
+            <SettingsItem title="Seed" icon={icons.calendar} onPress={seed} />
+          )}
           <SettingsItem
             title="My Bookings"
             icon={icons.calendar}
